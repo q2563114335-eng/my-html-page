@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>东京旅行 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Kaisei+Opti:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & ROOT ===== */
+:root {
+  --ink: #1a1208;
+  --paper: #fdf8f0;
+  --cream: #f5ede0;
+  --gold: #c8960c;
+  --gold-light: #e8b84b;
+  --vermillion: #c0392b;
+  --sakura: #e8a0b4;
+  --indigo: #2c3e6b;
+  --moss: #4a6741;
+  --silver: #8a8a8a;
+  --border: #ddd0b8;
+  --card-bg: #ffffff;
+  --ginza: #F39700;
+  --hanzomon: #8F76D6;
+  --sobu: #FFD400;
+  --yamanote: #80C241;
+  --asakusa-toei: #EF454A;
+  --skyliner: #1E3F8B;
+  --safe-top: env(safe-area-inset-top, 44px);
+  --safe-bottom: env(safe-area-inset-bottom, 34px);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { font-size: 16px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* bottom nav height + safe area */
+  padding-bottom: calc(68px + var(--safe-bottom));
+}
+
+/* ===== STATUS BAR SPACE ===== */
+.status-bar {
+  height: var(--safe-top);
+  background: var(--indigo);
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--indigo);
+  padding: 20px 20px 28px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 60%, rgba(200,150,12,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 10%, rgba(232,160,180,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-jp {
+  font-family: 'Kaisei Opti', serif;
+  font-size: 38px;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+  position: relative;
+  text-shadow: 0 2px 16px rgba(200,150,12,0.35);
+  line-height: 1.2;
+}
+.hero-sub {
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.55);
+  margin-top: 5px;
+  text-transform: uppercase;
+  position: relative;
+}
+.hero-dates-row {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+}
+.hero-date-pill {
+  flex: 1;
+  max-width: 160px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+}
+.hero-date-pill .pill-icon { font-size: 18px; display: block; margin-bottom: 3px; }
+.hero-date-pill .pill-date { color: var(--gold-light); font-weight: 500; font-size: 13px; display: block; }
+.hero-date-pill .pill-time { font-size: 11px; color: rgba(255,255,255,0.55); }
+.hero-badges {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: relative;
+}
+.hero-badge {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ===== BOTTOM TAB BAR ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  padding-bottom: var(--safe-bottom);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.07);
+}
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 10px 2px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: all 0.15s;
+  min-height: 56px;
+  -webkit-touch-callout: none;
+}
+.tab-icon { font-size: 20px; line-height: 1; }
+.tab-label {
+  font-size: 9.5px;
+  color: var(--silver);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.tab-day-num {
+  font-size: 8.5px;
+  color: #bbb;
+}
+.tab-btn.active .tab-label { color: var(--vermillion); font-weight: 500; }
+.tab-btn.active .tab-icon { transform: scale(1.1); }
+.tab-btn.active .tab-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--vermillion);
+  margin-top: -1px;
+}
+.tab-dot { width: 4px; height: 4px; }
+
+/* ===== MAIN CONTENT ===== */
+.content-wrap { padding: 0 16px 24px; }
+
+.day-section { display: none; }
+.day-section.active { display: block; animation: slideUp 0.28s ease; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== DAY HEADER ===== */
+.day-header {
+  padding: 20px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.day-num {
+  font-family: 'Kaisei Opti', serif;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.3;
+  flex-shrink: 0;
+}
+.day-title-block h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+}
+.day-title-block p {
+  font-size: 11px;
+  color: var(--silver);
+  margin-top: 3px;
+  letter-spacing: 0.05em;
+}
+
+/* ===== INFO BOX ===== */
+.info-box {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 13px 14px;
+  margin: 0 0 18px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.info-box strong { color: var(--indigo); }
+.info-box.warn { border-left-color: var(--vermillion); }
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0 12px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-label span {
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--silver);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.section-label .sdot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ===== TIMELINE ===== */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 44px;
+  top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--border) 0%, var(--border) 92%, transparent 100%);
+}
+.tl-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+  position: relative;
+  align-items: flex-start;
+}
+.tl-time {
+  flex-shrink: 0;
+  width: 44px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--silver);
+  padding-top: 14px;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.tl-dot {
+  flex-shrink: 0;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--border);
+  margin-top: 17px;
+  position: relative;
+  z-index: 1;
+}
+.tl-dot.transport { background: var(--indigo); }
+.tl-dot.food     { background: var(--vermillion); }
+.tl-dot.special  { background: var(--sakura); box-shadow: 0 0 0 2px var(--sakura); }
+
+.tl-card {
+  flex: 1;
+  min-width: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 14px;
+  /* subtle lift on tap */
+  transition: transform 0.12s, box-shadow 0.12s;
+  -webkit-touch-callout: none;
+}
+.tl-card:active { transform: scale(0.985); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+
+.tl-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+.tl-card h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  flex: 1;
+}
+.tl-card p {
+  font-size: 12.5px;
+  color: #555;
+  margin-top: 7px;
+  line-height: 1.65;
+}
+
+.transport-card { background: #f0f4ff; border-color: #c5cef0; }
+.transport-card h3 { color: var(--indigo); }
+.food-tag { background: #fff8f7; border-color: #f5c5bb; }
+.food-tag h3 { color: var(--vermillion); }
+
+/* ===== MAP BUTTON ===== */
+.map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 400;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 32px;
+  transition: opacity 0.15s;
+}
+.map-btn:active { opacity: 0.75; }
+
+/* ===== ROUTE CHIPS ===== */
+.route-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 20px;
+  padding: 3px 9px 3px 5px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+}
+.chip .lc {
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8.5px; font-weight: 700;
+}
+.chip-arrow { color: var(--silver); font-size: 11px; }
+.chip-time {
+  background: var(--indigo);
+  color: white;
+  border-radius: 20px;
+  padding: 3px 9px;
+  font-size: 11px;
+}
+.chip-walk { background: #666; }
+
+/* ===== TRANSPORT ROUTE CARDS (replaces table on mobile) ===== */
+.route-card-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.route-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 14px;
+}
+.route-card .rc-route { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 7px; }
+.route-card .rc-line { font-size: 12.5px; color: #444; margin-bottom: 5px; }
+.route-card .rc-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.rc-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--cream);
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 11.5px;
+  color: var(--ink);
+}
+.rc-badge.time { background: #eef2ff; color: var(--indigo); }
+.rc-badge.cost { background: #fff4e0; color: #a06800; }
+
+/* ===== FOOD CARDS ===== */
+.food-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.food-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.food-card:active { transform: scale(0.985); }
+.food-emoji { font-size: 28px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+.food-body { flex: 1; min-width: 0; }
+.food-name { font-family: 'Noto Serif SC', serif; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+.food-type { font-size: 10.5px; color: var(--vermillion); margin: 2px 0 5px; letter-spacing: 0.05em; }
+.food-desc { font-size: 12px; color: #666; line-height: 1.55; }
+.food-actions { display: flex; align-items: center; gap: 8px; margin-top: 9px; flex-wrap: wrap; }
+.food-price {
+  font-size: 11px; color: var(--moss);
+  background: #f0f7ef; border-radius: 6px;
+  padding: 3px 9px;
+}
+
+/* ===== TIPS GRID ===== */
+.tips-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.tip-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.tip-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.tip-body h4 { font-size: 14px; font-weight: 600; color: var(--indigo); margin-bottom: 4px; }
+.tip-body p { font-size: 12.5px; color: #555; line-height: 1.55; }
+
+/* ===== COMMON ROUTES TABLE → CARDS ===== */
+.common-route {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 14px;
+  margin-bottom: 10px;
+}
+.common-route .cr-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.common-route .cr-detail {
+  font-size: 12.5px;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.cr-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ===== SCROLL HINT ===== */
+.scroll-hint {
+  text-align: center;
+  font-size: 11px;
+  color: #bbb;
+  padding: 10px 0 4px;
+  letter-spacing: 0.06em;
+}
+
+/* ===== FOOTER ===== */
+.page-footer {
+  text-align: center;
+  padding: 20px 16px 10px;
+  font-size: 11.5px;
+  color: var(--silver);
+  letter-spacing: 0.08em;
+}
+.page-footer strong { color: var(--gold); }
+
+</style>
+</head>
+<body>
+
+<div class="status-bar"></div>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-jp">東 京 旅 行</div>
+  <div class="hero-sub">Tokyo Journey 2025 · Golden Week</div>
+  <div class="hero-dates-row">
+    <div class="hero-date-pill">
+      <span class="pill-icon">🛬</span>
+      <span class="pill-date">4月30日</span>
+      <span class="pill-time">落地 19:40</span>
+    </div>
+    <div class="hero-date-pill">
+      <span class="pill-icon">🛫</span>
+      <span class="pill-date">5月5日</span>
+      <span class="pill-time">起飞 13:25</span>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="hero-badge">🏨 浅草桥</div>
+    <div class="hero-badge">🚇 地铁出行</div>
+    <div class="hero-badge">🌸 黄金周·5晚</div>
+  </div>
+</div>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="tab-btn active" onclick="showDay('d0',this)">
+    <span class="tab-icon">🗺</span>
+    <span class="tab-label">交通</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="tab-btn" onclick="showDay('d1',this)">
+    <span class="tab-icon">✈️</span>
+    <span class="tab-label">4/30</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="tab-btn" onclick="showDay('d2',this)">
+    <span class="tab-icon">⛩️</span>
+    <span class="tab-label">5/1</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="tab-btn" onclick="showDay('d3',this)">
+    <span class="tab-icon">🛍️</span>
+    <span class="tab-label">5/2</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="tab-btn" onclick="showDay('d4',this)">
+    <span class="tab-icon">🌿</span>
+    <span class="tab-label">5/3</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="tab-btn" onclick="showDay('d5',this)">
+    <span class="tab-icon">🎮</span>
+    <span class="tab-label">5/4</span>
+    <span class="tab-dot"></span>
+  </button>
+  <button class="tab-btn" onclick="showDay('d6',this)">
+    <span class="tab-icon">🏠</span>
+    <span class="tab-label">5/5</span>
+    <span class="tab-dot"></span>
+  </button>
+</nav>
+
+<!-- ===== PAGES ===== -->
+<div class="content-wrap">
+
+<!-- ============================================================ D0 · 交通攻略 -->
+<div class="day-section active" id="d0">
+  <div class="day-header">
+    <div class="day-num">交</div>
+    <div class="day-title-block">
+      <h2>成田机场 ↔ 浅草桥</h2>
+      <p>Airport Transportation Guide</p>
+    </div>
+  </div>
+
+  <div class="section-label"><div class="sdot"></div><span>抵达 · 4月30日</span></div>
+  <div class="info-box">
+    ✈️ 落地 <strong>19:40</strong>，入境+取行李约1h。建议乘坐 <strong>京成Skyliner</strong>，约21:40前到酒店。
+  </div>
+
+  <div class="route-card-list">
+    <div class="route-card">
+      <div class="rc-route">成田机场 → 京成上野</div>
+      <div class="route-chips">
+        <span class="chip" style="background:var(--skyliner)"><span class="lc">S</span>京成Skyliner</span>
+      </div>
+      <div class="rc-meta">
+        <span class="rc-badge time">⏱ ~41分钟</span>
+        <span class="rc-badge cost">¥ 2,570</span>
+        <a class="map-btn" href="https://www.google.com/maps/dir/Narita+Airport+Terminal+1+Station/Keisei+Ueno+Station" target="_blank">🗺 导航</a>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="rc-route">京成上野 → 浅草桥</div>
+      <div class="route-chips">
+        <span class="chip" style="background:#888;color:#fff">步行至JR上野站</span>
+        <span class="chip-arrow">→</span>
+        <span class="chip" style="background:var(--sobu);color:#333"><span class="lc" style="background:rgba(0,0,0,0.1);color:#333">総</span>JR总武线</span>
+      </div>
+      <div class="rc-meta">
+        <span class="rc-badge time">⏱ ~7分钟</span>
+        <span class="rc-badge cost">¥ 170</span>
+        <a class="map-btn" href="https://www.google.com/maps/dir/Ueno+Station/Asakusabashi+Station" target="_blank">🗺 导航</a>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="rc-route">浅草桥站 → 酒店</div>
+      <div class="route-chips">
+        <span class="chip chip-walk">🚶 步行约3分钟</span>
+      </div>
+      <div class="rc-meta">
+        <a class="map-btn" href="https://www.google.com/maps/search/Mystays+Premier+Asakusabashi" target="_blank">🏨 酒店位置</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:24px"><div class="sdot"></div><span>返程 · 5月5日</span></div>
+  <div class="info-box warn">
+    ⚠️ 航班 <strong>13:25</strong> 起飞，请 <strong>09:15</strong> 退房，乘坐 <strong>10:03 Skyliner</strong> 从上野出发，10:44 到达成田。
+  </div>
+
+  <div class="route-card-list">
+    <div class="route-card">
+      <div class="rc-route">浅草桥 → 京成上野</div>
+      <div class="route-chips">
+        <span class="chip" style="background:var(--sobu);color:#333">JR总武线</span>
+        <span class="chip-arrow">→ 步行至京成上野</span>
+      </div>
+      <div class="rc-meta">
+        <span class="rc-badge time">⏱ ~12分钟</span>
+        <span class="rc-badge cost">¥ 170</span>
+        <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Keisei+Ueno+Station" target="_blank">🗺 导航</a>
+      </div>
+    </div>
+    <div class="route-card">
+      <div class="rc-route">京成上野 → 成田机场</div>
+      <div class="route-chips">
+        <span class="chip" style="background:var(--skyliner)"><span class="lc">S</span>Skyliner 10:03发</span>
+      </div>
+      <div class="rc-meta">
+        <span class="rc-badge time">⏱ ~41分钟</span>
+        <span class="rc-badge cost">¥ 2,570</span>
+        <a class="map-btn" href="https://www.google.com/maps/dir/Keisei+Ueno/Narita+Airport" target="_blank">🗺 导航</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:24px"><div class="sdot"></div><span>常用路线速查</span></div>
+
+  <div class="common-route">
+    <div class="cr-title">→ 浅草寺</div>
+    <div class="route-chips"><span class="chip" style="background:var(--asakusa-toei)">都营浅草线</span><span style="font-size:11.5px;color:#777;margin-left:4px">东日本桥 → 浅草（3站）</span></div>
+    <div class="cr-footer" style="margin-top:8px">
+      <span class="rc-badge time">⏱ ~8分钟</span><span class="rc-badge cost">¥180</span>
+      <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi/Sensoji+Temple" target="_blank">🗺</a>
+    </div>
+  </div>
+  <div class="common-route">
+    <div class="cr-title">→ 涩谷</div>
+    <div class="route-chips"><span class="chip" style="background:var(--asakusa-toei)">都营浅草线</span><span class="chip-arrow">→押上→</span><span class="chip" style="background:var(--hanzomon)">半藏门线</span></div>
+    <div class="cr-footer" style="margin-top:8px">
+      <span class="rc-badge time">⏱ ~35分钟</span><span class="rc-badge cost">¥270</span>
+      <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi/Shibuya+Station" target="_blank">🗺</a>
+    </div>
+  </div>
+  <div class="common-route">
+    <div class="cr-title">→ 新宿</div>
+    <div class="route-chips"><span class="chip" style="background:var(--sobu);color:#333">JR总武线直达</span></div>
+    <div class="cr-footer" style="margin-top:8px">
+      <span class="rc-badge time">⏱ ~27分钟</span><span class="rc-badge cost">¥230</span>
+      <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Shinjuku+Station" target="_blank">🗺</a>
+    </div>
+  </div>
+  <div class="common-route">
+    <div class="cr-title">→ 秋叶原</div>
+    <div class="route-chips"><span class="chip" style="background:var(--sobu);color:#333">JR总武线（1站）</span></div>
+    <div class="cr-footer" style="margin-top:8px">
+      <span class="rc-badge time">⏱ ~3分钟</span><span class="rc-badge cost">¥140</span>
+      <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Akihabara+Station" target="_blank">🗺</a>
+    </div>
+  </div>
+  <div class="common-route">
+    <div class="cr-title">→ 原宿</div>
+    <div class="route-chips"><span class="chip" style="background:var(--sobu);color:#333">总武线</span><span class="chip-arrow">→秋叶原→</span><span class="chip" style="background:var(--yamanote)">山手线</span></div>
+    <div class="cr-footer" style="margin-top:8px">
+      <span class="rc-badge time">⏱ ~30分钟</span><span class="rc-badge cost">¥200</span>
+      <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Harajuku+Station" target="_blank">🗺</a>
+    </div>
+  </div>
+  <div class="common-route">
+    <div class="cr-title">→ 银座</div>
+    <div class="route-chips"><span class="chip" style="background:var(--asakusa-toei)">都营浅草线</span><span style="font-size:11.5px;color:#777;margin-left:4px">→宝町站</span></div>
+    <div class="cr-footer" style="margin-top:8px">
+      <span class="rc-badge time">⏱ ~15分钟</span><span class="rc-badge cost">¥180</span>
+      <a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi/Ginza+Tokyo" target="_blank">🗺</a>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:24px"><div class="sdot"></div><span>实用贴士</span></div>
+  <div class="tips-list">
+    <div class="tip-card"><div class="tip-icon">💳</div><div class="tip-body"><h4>Suica / PASMO 交通卡</h4><p>落地即在机场购买，覆盖所有地铁+JR+便利店，无需每次买票。</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🌐</div><div class="tip-body"><h4>Google Maps 导航</h4><p>在日本极准确，显示换乘站、月台号和实时时刻表，全程可信赖。</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🎌</div><div class="tip-body"><h4>黄金周提示</h4><p>5/1-5人流极大，热门景点建议8:30前到场，餐厅需提前排队或预约。</p></div></div>
+    <div class="tip-card"><div class="tip-icon">🚇</div><div class="tip-body"><h4>末班车</h4><p>地铁至约00:00-01:00，JR山手线约01:00，请提前规划避免打车。</p></div></div>
+  </div>
+</div>
+
+<!-- ============================================================ D1 · 4/30 抵达 -->
+<div class="day-section" id="d1">
+  <div class="day-header">
+    <div class="day-num">01</div>
+    <div class="day-title-block">
+      <h2>抵达东京 · 安顿住宿</h2>
+      <p>April 30 · Arrival Day</p>
+    </div>
+  </div>
+  <div class="info-box">
+    ✈️ 航班 <strong>19:40</strong> 落地，入境+取行李约1h，预计 <strong>21:40</strong> 前抵达酒店。今日轻松安排，早睡迎接明天。
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">19:40</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>✈️ 成田机场落地</h3><a class="map-btn" href="https://www.google.com/maps/place/Narita+International+Airport" target="_blank">🗺</a></div>
+        <p>入境→取行李→购买Suica交通卡→前往京成Skyliner</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">~20:40</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 Skyliner → JR → 浅草桥</h3><a class="map-btn" href="https://www.google.com/maps/dir/Narita+Airport/Asakusabashi+Station" target="_blank">🗺</a></div>
+        <p>京成Skyliner（41分） → 京成上野 → 步行至JR上野 → JR总武线（7分）→ 浅草桥站</p>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--skyliner)"><span class="lc">S</span>Skyliner</span>
+          <span class="chip-arrow">→</span>
+          <span class="chip" style="background:var(--sobu);color:#333">JR总武线</span>
+          <span class="chip-time">~55分钟</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">~21:40</div>
+      <div class="tl-dot special"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🏨 入住 Mystays Asakusabashi</h3><a class="map-btn" href="https://www.google.com/maps/search/Mystays+Premier+Asakusabashi" target="_blank">🗺</a></div>
+        <p>距浅草桥站步行约3分钟，办理入住，整理行程。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">~22:00</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍜 就近晚餐</h3><a class="map-btn" href="https://www.google.com/maps/search/ramen+Asakusabashi" target="_blank">🗺</a></div>
+        <p>推荐附近<strong>富士そば</strong>（24h营业）或便利店泡面+饭团，不建议今晚远行。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ D2 · 5/1 浅草 -->
+<div class="day-section" id="d2">
+  <div class="day-header">
+    <div class="day-num">02</div>
+    <div class="day-title-block">
+      <h2>浅草寺 · 仲见世 · 晴空塔</h2>
+      <p>May 1 · Asakusa · Tokyo Skytree</p>
+    </div>
+  </div>
+  <div class="info-box">
+    今日行程集中酒店附近，步行/1站地铁即达。黄金周浅草人流大，<strong>建议9点前到雷门</strong>。
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:00</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>☕ 早餐 · 浅草周边</h3></div>
+        <p>推荐 <strong>Doutor Coffee</strong> 日式早餐套餐（厚吐司+咖啡，¥500）或便利店。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>⛩️ 浅草寺 &amp; 雷门</h3><a class="map-btn" href="https://www.google.com/maps/place/Senso-ji+Temple" target="_blank">🗺</a></div>
+        <p>东京最古老寺庙，标志性大灯笼。院内可求签（おみくじ），体验日本文化。</p>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--asakusa-toei)">都营浅草线</span>
+          <span style="font-size:11px;color:#888">东日本桥→浅草 ¥180</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🛍️ 仲见世商店街</h3><a class="map-btn" href="https://www.google.com/maps/place/Nakamise+Shopping+Street" target="_blank">🗺</a></div>
+        <p>日本最古老商店街，购买人形烧、雷おこし等传统点心。7楼<strong>免费眺望台</strong>可俯瞰雷门。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">11:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍤 午餐 · 大黑家天妇罗</h3><a class="map-btn" href="https://www.google.com/maps/search/Daikokuya+Tempura+Asakusa" target="_blank">🗺</a></div>
+        <p>1887年创业老铺，招牌黑芝麻汁天妇罗饭 ¥2,200。黄金周需排队，11:30前到可减少等待。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🗼 东京晴空塔 Skytree</h3><a class="map-btn" href="https://www.google.com/maps/place/Tokyo+Skytree" target="_blank">🗺</a></div>
+        <p>634m全球第二高塔，天望デッキ（350m）¥2,100，建议官网提前预约。底部SOLAMACHI有大量购物美食。</p>
+        <div class="route-chips">
+          <span class="chip chip-walk">🚶 从浅草步行约15分钟</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">16:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🌊 隅田川沿岸 &amp; 吾妻桥</h3><a class="map-btn" href="https://www.google.com/maps/place/Sumida+River,+Tokyo" target="_blank">🗺</a></div>
+        <p>在吾妻桥拍摄晴空塔+金色火焰雕塑经典构图，傍晚光线绝佳。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">18:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🥩 晚餐 · 浅草今半</h3><a class="map-btn" href="https://www.google.com/maps/search/Asakusa+Imahan+sukiyaki" target="_blank">🗺</a></div>
+        <p>明治时代创业寿喜烧老铺，和牛套餐 ¥5,000~8,000，或选平价的<strong>驹形どぜう</strong>泥鳅锅。</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-label"><div class="sdot"></div><span>今日推荐</span></div>
+  <div class="food-list">
+    <div class="food-card">
+      <div class="food-emoji">🍤</div>
+      <div class="food-body">
+        <div class="food-name">大黑家天妇罗</div>
+        <div class="food-type">天妇罗 · 午餐</div>
+        <div class="food-desc">百年老铺，浓郁芝麻色油炸，天妇罗饭¥2,200</div>
+        <div class="food-actions"><span class="food-price">¥1,500~3,000</span><a class="map-btn" href="https://www.google.com/maps/search/Daikokuya+tempura+asakusa" target="_blank">🗺</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🍡</div>
+      <div class="food-body">
+        <div class="food-name">仲见世点心</div>
+        <div class="food-type">和菓子 · 随走随吃</div>
+        <div class="food-desc">人形烧、草饼、雷おこし，每样¥200~500</div>
+        <div class="food-actions"><span class="food-price">¥200~500</span><a class="map-btn" href="https://www.google.com/maps/place/Nakamise+Shopping+Street" target="_blank">🗺</a></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🥩</div>
+      <div class="food-body">
+        <div class="food-name">浅草今半</div>
+        <div class="food-type">寿喜烧 · 晚餐</div>
+        <div class="food-desc">和牛涮涮锅/寿喜烧，精致日式氛围</div>
+        <div class="food-actions"><span class="food-price">¥5,000~10,000</span><a class="map-btn" href="https://www.google.com/maps/search/Asakusa+Imahan" target="_blank">🗺</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ D3 · 5/2 涩谷原宿 -->
+<div class="day-section" id="d3">
+  <div class="day-header">
+    <div class="day-num">03</div>
+    <div class="day-title-block">
+      <h2>原宿 · 明治神宫 · 涩谷天空</h2>
+      <p>May 2 · Harajuku · Shibuya Sky</p>
+    </div>
+  </div>
+  <div class="info-box">
+    今日路线：浅草桥→原宿→表参道→涩谷。<br>
+    ⭐ <strong>涩谷天空请提前官网预约</strong>（¥2,000），日落时段最抢手。
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">08:30</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 浅草桥 → 原宿</h3><a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Harajuku+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--sobu);color:#333">JR总武线</span>
+          <span class="chip-arrow">→秋叶原→</span>
+          <span class="chip" style="background:var(--yamanote)">JR山手线</span>
+          <span class="chip-time">~30分钟 ¥200</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>⛩️ 明治神宫</h3><a class="map-btn" href="https://www.google.com/maps/place/Meiji+Jingu+Shrine" target="_blank">🗺</a></div>
+        <p>70万棵树木环绕的大型神社，市中心难得的森林体验。黄金周有传统武道表演。<strong>免费</strong>入场，约1小时。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🛍️ 竹下通 Takeshita Street</h3><a class="map-btn" href="https://www.google.com/maps/place/Takeshita+Street" target="_blank">🗺</a></div>
+        <p>原宿年轻文化街道，造型夸张棉花糖可丽饼（¥700~900）必吃，复古服装店、娃娃机约1小时逛完。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍜 午餐 · 一兰拉面</h3><a class="map-btn" href="https://www.google.com/maps/search/Ichiran+Ramen+Shibuya" target="_blank">🗺</a></div>
+        <p><strong>一兰拉面</strong>独立隔间设计，博多豚骨汤底约¥1,200，24h营业。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🌿 表参道 Omotesando</h3><a class="map-btn" href="https://www.google.com/maps/place/Omotesando,+Tokyo" target="_blank">🗺</a></div>
+        <p>东京的香榭大街，梧桐树下汇聚LV、Gucci等旗舰店及A.P.C.等中高端品牌，步行至涩谷约15分钟。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🚦 涩谷十字路口 Scramble</h3><a class="map-btn" href="https://www.google.com/maps/place/Shibuya+Scramble+Crossing" target="_blank">🗺</a></div>
+        <p>全球最繁忙人行横道，一次绿灯约3,000人同时穿越。对面TSUTAYA 2楼星巴克可俯瞰全景（需消费）。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:30</div>
+      <div class="tl-dot special"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🌇 涩谷天空（日落时段）</h3><a class="map-btn" href="https://www.google.com/maps/place/Shibuya+Sky" target="_blank">🗺</a></div>
+        <p>涩谷SCRAMBLE SQUARE 45-46楼露天展望台，360°全景，日落最美。<strong>强烈提前预约</strong> ¥2,000。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">19:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🦀 晚餐 · 磯丸水産</h3><a class="map-btn" href="https://www.google.com/maps/search/Isomaru+Suisan+Shibuya" target="_blank">🗺</a></div>
+        <p>海鲜居酒屋，现烤贝类+生鱼片超新鲜，约¥2,500~3,500。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">21:30</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 涩谷 → 浅草桥</h3><a class="map-btn" href="https://www.google.com/maps/dir/Shibuya+Station/Asakusabashi+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--hanzomon)">半藏门线</span>
+          <span class="chip-arrow">→押上→</span>
+          <span class="chip" style="background:var(--asakusa-toei)">都营浅草线</span>
+          <span class="chip-time">~35分钟 ¥270</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ D4 · 5/3 新宿 -->
+<div class="day-section" id="d4">
+  <div class="day-header">
+    <div class="day-num">04</div>
+    <div class="day-title-block">
+      <h2>新宿御苑 · 都厅 · 思い出横丁</h2>
+      <p>May 3 · Shinjuku · Memory Lane</p>
+    </div>
+  </div>
+  <div class="info-box">
+    浅草桥→新宿 <strong>JR总武线直达，约27分钟无需换乘</strong>，今日最轻松的出行。
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 浅草桥 → 新宿（直达）</h3><a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Shinjuku+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--sobu);color:#333">JR总武线直达，无需换乘</span>
+          <span class="chip-time">~27分钟 ¥230</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🌿 新宿御苑</h3><a class="map-btn" href="https://www.google.com/maps/place/Shinjuku+Gyoen+National+Garden" target="_blank">🗺</a></div>
+        <p>350亩，融合日式+法式+英式三种园林。5月初鸢尾花、牡丹盛开。门票¥500，可在内野餐。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍜 午餐 · 風次郎つけ麺</h3><a class="map-btn" href="https://www.google.com/maps/search/Fuunji+tsukemen+Shinjuku" target="_blank">🗺</a></div>
+        <p><strong>風次郎（Fuunji）</strong>新宿人气第一沾面，鸡白汤浓厚鱼介系约¥900，米其林推荐。黄金周需排队30-60分。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">14:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🆓 东京都厅展望台（免费）</h3><a class="map-btn" href="https://www.google.com/maps/place/Tokyo+Metropolitan+Government+Building" target="_blank">🗺</a></div>
+        <p>45楼南北塔，高202m，俯瞰新宿全景，晴天可望富士山。<strong>完全免费</strong>，开放至22:30。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🛒 新宿购物</h3><a class="map-btn" href="https://www.google.com/maps/place/Shinjuku+Isetan" target="_blank">🗺</a></div>
+        <p><strong>伊势丹</strong>（B2美食层必逛）· <strong>唐吉诃德</strong>（免税药妆+零食）· <strong>Yodobashi</strong>（电子产品）</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">18:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍢 晚餐 · 思い出横丁</h3><a class="map-btn" href="https://www.google.com/maps/place/Omoide+Yokocho" target="_blank">🗺</a></div>
+        <p>昭和风格串烧居酒屋群，烟雾弥漫、摩肩接踵。烤鸡串¥100~150/串，啤酒¥600，东京最市井的体验。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">20:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🌃 歌舞伎町夜游</h3><a class="map-btn" href="https://www.google.com/maps/place/Kabukicho,+Shinjuku" target="_blank">🗺</a></div>
+        <p>亚洲最大娱乐区，霓虹灯密集。TOHO Cinema前<strong>哥斯拉头像</strong>免费打卡，或逛歌舞伎町Tower。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">22:00</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 新宿 → 浅草桥</h3><a class="map-btn" href="https://www.google.com/maps/dir/Shinjuku+Station/Asakusabashi+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--sobu);color:#333">JR总武线直达</span>
+          <span class="chip-time">~27分钟 ¥230</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ D5 · 5/4 秋叶原 上野 银座 -->
+<div class="day-section" id="d5">
+  <div class="day-header">
+    <div class="day-num">05</div>
+    <div class="day-title-block">
+      <h2>秋叶原 · 上野 · 阿美横 · 银座</h2>
+      <p>May 4 · Akihabara · Ueno · Ginza</p>
+    </div>
+  </div>
+  <div class="info-box">
+    ⭐ <strong>秋叶原距酒店只有1站！</strong>三个区域相邻，银座线从上野直达银座无需换乘。
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">09:00</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 浅草桥 → 秋叶原（1站）</h3><a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi/Akihabara" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--sobu);color:#333">JR总武线（1站）</span>
+          <span class="chip-time">~3分钟 ¥140</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:15</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>☕ 早餐 · 星乃珈琲</h3></div>
+        <p>窑烤厚松饼+咖啡套餐 ¥800~1,000，蓬松香软，元气满满。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🎮 秋叶原电器街</h3><a class="map-btn" href="https://www.google.com/maps/place/Akihabara+Electric+Town" target="_blank">🗺</a></div>
+        <p><strong>Yodobashi Akiba</strong>（免税电子）· <strong>Super Potato</strong>（复古游戏）· <strong>Animate</strong>（动漫）· 女仆咖啡厅体验二次元文化。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:00</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 秋叶原 → 上野</h3><a class="map-btn" href="https://www.google.com/maps/dir/Akihabara/Ueno+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--yamanote)">JR山手线（2站）</span>
+          <span class="chip-time">~4分钟 ¥140</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">12:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍣 午餐 · 上野回転寿司</h3><a class="map-btn" href="https://www.google.com/maps/search/conveyor+belt+sushi+Ueno" target="_blank">🗺</a></div>
+        <p><strong>魚べい/元気寿司</strong>平板点单+超高速传送，约¥1,000~1,500饱腹，新鲜美味。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🏪 阿美横丁 Ameyoko</h3><a class="map-btn" href="https://www.google.com/maps/place/Ameyoko+Market" target="_blank">🗺</a></div>
+        <p>上野战后老市集，售卖干货、海鲜、药妆、廉价服装。氛围热闹，推荐购买海产干货带回，可砍价。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">15:00</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🏛️ 上野公园（可选）</h3><a class="map-btn" href="https://www.google.com/maps/place/Ueno+Park" target="_blank">🗺</a></div>
+        <p><strong>东京国立博物馆</strong>¥1,000 或 <strong>上野动物园</strong>¥600（有大熊猫）。或在公园歇息感受东京日常。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:00</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 上野 → 银座（直达）</h3><a class="map-btn" href="https://www.google.com/maps/dir/Ueno+Station/Ginza+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:#F39700">银座线（6站直达）</span>
+          <span class="chip-time">~12分钟 ¥180</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">17:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>💎 银座购物</h3><a class="map-btn" href="https://www.google.com/maps/place/Ginza,+Tokyo" target="_blank">🗺</a></div>
+        <p><strong>银座SIX</strong>（屋顶免费花园）· <strong>无印良品全球最大旗舰店</strong> · <strong>Itoya文具店</strong>。周六日中央通路无车，可散步。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">19:00</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🍽️ 最后晚餐 · 银座</h3><a class="map-btn" href="https://www.google.com/maps/search/dinner+Ginza" target="_blank">🗺</a></div>
+        <p><strong>资生堂パーラー</strong>（老牌日式西餐）或根据预算选择银座各类餐厅，为旅行画上美味句号。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">21:00</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 银座 → 浅草桥（收拾行李）</h3><a class="map-btn" href="https://www.google.com/maps/dir/Ginza+Station/Asakusabashi+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:#F39700">银座线→日本桥</span>
+          <span class="chip-arrow">→换乘→</span>
+          <span class="chip" style="background:var(--asakusa-toei)">都营浅草线</span>
+          <span class="chip-time">~20分钟 ¥200</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ D6 · 5/5 返程 -->
+<div class="day-section" id="d6">
+  <div class="day-header">
+    <div class="day-num">06</div>
+    <div class="day-title-block">
+      <h2>返程日 · さようなら東京</h2>
+      <p>May 5 · Departure · Flight 13:25</p>
+    </div>
+  </div>
+  <div class="info-box warn">
+    ⚠️ 航班 <strong>13:25 起飞</strong>。请 <strong>09:15 退房</strong>，乘坐 <strong>10:03 Skyliner</strong> 从京成上野出发，10:44 抵达成田机场，留足值机+安检时间（黄金周人多，务必提前2.5h）。
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">07:30</div>
+      <div class="tl-dot food"></div>
+      <div class="tl-card food-tag">
+        <div class="tl-card-header"><h3>🌅 最后的东京早餐</h3><a class="map-btn" href="https://www.google.com/maps/search/morning+coffee+Asakusabashi" target="_blank">🗺</a></div>
+        <p>推荐酒店附近<strong>Komeda珈琲</strong>或Doutor，点一份早餐套餐，感受东京清晨的节奏。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">08:30</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🛍️ 最后采购</h3><a class="map-btn" href="https://www.google.com/maps/search/pharmacy+Asakusabashi" target="_blank">🗺</a></div>
+        <p>浅草桥附近便利店+药妆店补购，或快速走一趟秋叶原（1站3分钟）。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:15</div>
+      <div class="tl-dot special"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🏨 退房 Check-out</h3><a class="map-btn" href="https://www.google.com/maps/search/Mystays+Premier+Asakusabashi" target="_blank">🗺</a></div>
+        <p>整理行李退房，拉行李箱步行3分钟至浅草桥站。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">09:30</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>🚆 浅草桥 → 京成上野</h3><a class="map-btn" href="https://www.google.com/maps/dir/Asakusabashi+Station/Keisei+Ueno+Station" target="_blank">🗺</a></div>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--sobu);color:#333">JR总武线</span>
+          <span class="chip-time">~7分钟 ¥170</span>
+        </div>
+        <p style="margin-top:7px;font-size:12px;color:#555">JR上野站下车后，步行5分钟至<strong>京成上野站（地下）</strong></p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:03</div>
+      <div class="tl-dot transport"></div>
+      <div class="tl-card transport-card">
+        <div class="tl-card-header"><h3>✈️ Skyliner → 成田机场</h3><a class="map-btn" href="https://www.google.com/maps/dir/Keisei+Ueno/Narita+Airport" target="_blank">🗺</a></div>
+        <p>乘坐 <strong>10:03 Skyliner</strong>，约10:44抵达成田T1/T2。黄金周返程高峰，备选10:23班次，但越早越好。</p>
+        <div class="route-chips">
+          <span class="chip" style="background:var(--skyliner)"><span class="lc">S</span>京成Skyliner</span>
+          <span class="chip-time">41分钟 ¥2,570</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">10:44</div>
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🛫 成田机场 · 值机</h3><a class="map-btn" href="https://www.google.com/maps/place/Narita+International+Airport" target="_blank">🗺</a></div>
+        <p>确认航站楼（T1/T2/T3），前往值机柜台。<strong>务必11:00前完成值机</strong>，12:55前登机。</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">13:25</div>
+      <div class="tl-dot special"></div>
+      <div class="tl-card">
+        <div class="tl-card-header"><h3>🛩️ 起飞 · さようなら東京！</h3></div>
+        <p>再见，东京！带着满满的回忆和伴手礼，期待下次再来 🗼🌸</p>
+      </div>
+    </div>
+  </div>
+  <div class="section-label"><div class="sdot"></div><span>必买伴手礼清单</span></div>
+  <div class="food-list">
+    <div class="food-card">
+      <div class="food-emoji">🍫</div>
+      <div class="food-body">
+        <div class="food-name">东京土产甜点</div>
+        <div class="food-type">伴手礼 · 必买</div>
+        <div class="food-desc">东京バナナ、白い恋人（北海道）、ろまんす甜点，机场便利店均有售</div>
+        <div class="food-actions"><span class="food-price">¥800~2,000</span></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">💊</div>
+      <div class="food-body">
+        <div class="food-name">日本药妆</div>
+        <div class="food-type">必买清单</div>
+        <div class="food-desc">肌研极润保湿乳 · DHC卸妆油 · 龙角散喉糖 · 小林退烧贴</div>
+        <div class="food-actions"><span class="food-price">松本清/マツキヨ</span></div>
+      </div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🍜</div>
+      <div class="food-body">
+        <div class="food-name">机场最后一碗拉面</div>
+        <div class="food-type">成田空港食堂</div>
+        <div class="food-desc">T2"拉面街"汇集各地名店，候机时享用最后一碗东京拉面</div>
+        <div class="food-actions"><span class="food-price">¥1,200~1,800</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">🗼 <strong>東京旅行 2025 · Golden Week</strong><br>Mystays Asakusa-bashi · 4/30 — 5/5</div>
+</div>
+
+</div><!-- /content-wrap -->
+
+<script>
+function showDay(id, btn) {
+  document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  // Scroll to top of content
+  window.scrollTo({ top: document.querySelector('.hero').offsetHeight + document.querySelector('.status-bar').offsetHeight, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
